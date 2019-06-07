@@ -26,6 +26,8 @@ class CardPage extends StatelessWidget {
 
   _card_1() {
     return Card(
+      elevation: 10,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -53,23 +55,31 @@ class CardPage extends StatelessWidget {
   }
 
   _card_2() {
-    final url =
+    final double bordeTarjeta = 20.0;
+    final String url =
         'https://static.photocdn.pt/images/articles/2017_1/iStock-545347988.jpg';
+
     return Card(
-      child: Column(
-        children: <Widget>[
-          FadeInImage(
-            image: NetworkImage(url),
-            placeholder: AssetImage('assets/images/jar-loading.gif'),
-            height: 260,
-            fit: BoxFit.cover,
-          ),
-          // Image(image: NetworkImage(url)),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Text('No sé que poner'),
-          )
-        ],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(bordeTarjeta),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(bordeTarjeta),
+        child: Column(
+          children: <Widget>[
+            FadeInImage(
+              image: NetworkImage(url),
+              placeholder: AssetImage('assets/images/jar-loading.gif'),
+              fadeInDuration: Duration(milliseconds: 200),
+              height: 260,
+              fit: BoxFit.cover,
+            ),
+            Container(
+              padding: EdgeInsets.all(10.0),
+              child: Text('No sé que poner'),
+            )
+          ],
+        ),
       ),
     );
   }
