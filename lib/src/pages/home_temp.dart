@@ -19,7 +19,7 @@ class HomePageTemp extends StatelessWidget {
     );
   }
 
-  List<Widget> _crearItems() {
+  /* List<Widget> _crearItems() {
     List<Widget> itemsList = new List<Widget>();
 
     for (String item in items) {
@@ -28,7 +28,7 @@ class HomePageTemp extends StatelessWidget {
     }
 
     return itemsList;
-  }
+  } */
 
   List<Widget> _crearItems2() {
     var widgets = items.map((item) {
