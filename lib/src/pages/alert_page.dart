@@ -28,8 +28,8 @@ class AlertPage extends StatelessWidget {
   void _mostrarAlerta(BuildContext context) {
     final _borderAlert =
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
-    final _borderButton =
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
+    /* final _borderButton =
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)); */
     showDialog(
         context: context,
         // barrierDismissible: true,
