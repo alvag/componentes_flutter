@@ -11,6 +11,8 @@ class CardPage extends StatelessWidget {
         padding: EdgeInsets.all(10),
         children: <Widget>[
           _card_1(),
+          SizedBox(height: 30),
+          _card_2(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -44,6 +46,28 @@ class CardPage extends StatelessWidget {
                 onPressed: () {},
               )
             ],
+          )
+        ],
+      ),
+    );
+  }
+
+  _card_2() {
+    final url =
+        'https://static.photocdn.pt/images/articles/2017_1/iStock-545347988.jpg';
+    return Card(
+      child: Column(
+        children: <Widget>[
+          FadeInImage(
+            image: NetworkImage(url),
+            placeholder: AssetImage('assets/images/jar-loading.gif'),
+            height: 260,
+            fit: BoxFit.cover,
+          ),
+          // Image(image: NetworkImage(url)),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text('No sé que poner'),
           )
         ],
       ),
