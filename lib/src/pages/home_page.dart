@@ -1,3 +1,4 @@
+import 'package:componentes_flutter/src/utils/icono_string_util.dart';
 import 'package:flutter/material.dart';
 
 import 'package:componentes_flutter/src/providers/menu_provider.dart';
@@ -31,8 +32,8 @@ class HomePage extends StatelessWidget {
     data.forEach((opt) {
       final widgetTemp = ListTile(
         title: Text(opt['texto']),
-        leading: Icon(Icons.accessibility, color: Colors.blue),
-        trailing: Icon(Icons.arrow_back, color: Colors.blue),
+        leading: getIcon(opt['icon']),
+        trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
         onTap: () {},
       );
 
