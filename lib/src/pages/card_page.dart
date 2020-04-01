@@ -8,11 +8,16 @@ class CardPage extends StatelessWidget {
         title: Text('Cards'),
       ),
       body: ListView(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(10.0),
         children: <Widget>[
           _card_1(),
-          SizedBox(height: 30),
+          SizedBox(height: 30.0),
           _card_2(),
+          SizedBox(height: 30.0),
+          _card_3(),
+          SizedBox(
+            height: 30.0,
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -27,7 +32,7 @@ class CardPage extends StatelessWidget {
   _card_1() {
     return Card(
       elevation: 10,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -71,7 +76,7 @@ class CardPage extends StatelessWidget {
               image: NetworkImage(url),
               placeholder: AssetImage('assets/images/jar-loading.gif'),
               fadeInDuration: Duration(milliseconds: 200),
-              height: 260,
+              height: 300.0,
               fit: BoxFit.cover,
             ),
             Container(
@@ -80,6 +85,47 @@ class CardPage extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  _card_3() {
+    final double bordeTarjeta = 30.0;
+    final String url =
+        'https://static.photocdn.pt/images/articles/2017_1/iStock-545347988.jpg';
+
+    final card = Container(
+      child: Column(
+        children: <Widget>[
+          FadeInImage(
+            image: NetworkImage(url),
+            placeholder: AssetImage('assets/images/jar-loading.gif'),
+            fadeInDuration: Duration(milliseconds: 200),
+            height: 300.0,
+            fit: BoxFit.cover,
+          ),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text('No sé que poner'),
+          )
+        ],
+      ),
+    );
+
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(bordeTarjeta),
+          color: Colors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black26,
+                blurRadius: 10.0,
+                spreadRadius: 2.0,
+                offset: Offset(2.0, 10.0))
+          ]),
+      child: ClipRRect(
+        child: card,
+        borderRadius: BorderRadius.circular(bordeTarjeta),
       ),
     );
   }
