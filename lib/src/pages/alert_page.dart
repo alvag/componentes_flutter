@@ -32,7 +32,7 @@ class AlertPage extends StatelessWidget {
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)); */
     showDialog(
         context: context,
-        // barrierDismissible: true,
+        barrierDismissible: false,
         builder: (context) {
           return AlertDialog(
             shape: _borderAlert,

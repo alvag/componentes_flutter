@@ -8,7 +8,11 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   String _nombre = '';
   String _email = '';
-  String _password = '';
+  String _date = '';
+  String _selectedItem = 'Volar';
+  List<String> _poderes = ['Volar', 'Rayos X', 'Fuerza', 'Velocidad'];
+
+  TextEditingController _inputDateController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,10 @@ class _InputPageState extends State<InputPage> {
           Divider(),
           _crearPassword(),
           Divider(),
+          _crearDate(context),
+          Divider(),
+          _crearDropdown(),
+          Divider(),
           _crearPersona(),
         ],
       ),
@@ -38,6 +46,7 @@ class _InputPageState extends State<InputPage> {
   Widget _crearInput() {
     return TextField(
       autofocus: true,
+      maxLength: 10,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -61,7 +70,6 @@ class _InputPageState extends State<InputPage> {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-        counter: Text('Letras ${_email.length}'),
         hintText: 'Correo Electrónico',
         labelText: 'Email',
         helperText: 'Ingresa tu correo',
@@ -81,18 +89,12 @@ class _InputPageState extends State<InputPage> {
       obscureText: true,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-        counter: Text('Letras ${_password.length}'),
         hintText: 'Contraseña',
         labelText: 'Contraseña',
         helperText: 'Ingresa tu contraseña',
         suffixIcon: Icon(Icons.lock_open),
         icon: Icon(Icons.lock),
       ),
-      onChanged: (value) {
-        setState(() {
-          _email = value;
-        });
-      },
     );
   }
 
@@ -100,6 +102,71 @@ class _InputPageState extends State<InputPage> {
     return ListTile(
       title: Text('Nombre es: $_nombre'),
       subtitle: Text('Email: $_email'),
+      trailing: Text(_selectedItem),
     );
+  }
+
+  _crearDate(BuildContext context) {
+    return TextField(
+      controller: _inputDateController,
+      enableInteractiveSelection: false,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        hintText: 'Fecha',
+        labelText: 'Fecha',
+        helperText: 'Selecciona una fecha',
+        suffixIcon: Icon(Icons.perm_contact_calendar),
+        icon: Icon(Icons.calendar_today),
+      ),
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+        _selectDate(context);
+      },
+    );
+  }
+
+  _selectDate(BuildContext context) async {
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(2018),
+        lastDate: new DateTime(2025),
+        locale: Locale('es', 'ES'));
+
+    if (picked != null) {
+      setState(() {
+        _date = picked.toString();
+        _inputDateController.text = _date;
+      });
+    }
+  }
+
+  _crearDropdown() {
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all),
+        SizedBox(width: 30.0),
+        Expanded(
+          child: DropdownButton(
+            value: _selectedItem,
+            items: itemsDropdown(),
+            onChanged: (item) {
+              setState(() {
+                _selectedItem = item;
+              });
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+  List<DropdownMenuItem<String>> itemsDropdown() {
+    List<DropdownMenuItem<String>> list = new List();
+
+    _poderes
+        .forEach((p) => list.add(DropdownMenuItem(child: Text(p), value: p)));
+
+    return list;
   }
 }
