@@ -41,25 +41,40 @@ class _ListPageState extends State<ListPage> {
             ),
             body: Stack(
                 children: <Widget>[
-                    _crearLista(),
-                    _crearLoading(),
+                    _createList(),
+                    _loading(),
                 ],
             ),
         );
     }
 
-    Widget _crearLista() {
-        return ListView.builder(
-            controller: _scrollController,
-            itemCount: _listaNumeros.length,
-            itemBuilder: (BuildContext context, int index) {
-                final img = _listaNumeros[index];
-                return FadeInImage(
-                    image: NetworkImage('https://picsum.photos/500/300?random=$img'),
-                    placeholder: AssetImage('assets/images/jar-loading.gif'),
-                );
-            },
+    Widget _createList() {
+        return RefreshIndicator(
+            child: ListView.builder(
+                controller: _scrollController,
+                itemCount: _listaNumeros.length,
+                itemBuilder: (BuildContext context, int index) {
+                    final img = _listaNumeros[index];
+                    return FadeInImage(
+                        image: NetworkImage('https://picsum.photos/500/300?random=$img'),
+                        placeholder: AssetImage('assets/images/jar-loading.gif'),
+                    );
+                },
+            ),
+            onRefresh: _getPageOne,
         );
+    }
+
+    Future<Null> _getPageOne() async {
+        final duration = new Duration(seconds: 2);
+        new Timer(duration, () {
+            _listaNumeros.clear();
+            _lastItem++;
+
+            _addMoreImage();
+        });
+
+        return Future.delayed(duration);
     }
 
     void _addMoreImage() {
@@ -87,11 +102,11 @@ class _ListPageState extends State<ListPage> {
             curve: Curves.fastOutSlowIn,
             duration: Duration(milliseconds: 250)
         );
-        
+
         _addMoreImage();
     }
 
-    Widget _crearLoading() {
+    Widget _loading() {
         if (_isLoading) {
             return Column(
                 mainAxisSize: MainAxisSize.max,
