@@ -27,8 +27,13 @@
         },
         {
             "ruta": "slider",
-            "icon": "list",
+            "icon": "tune",
             "texto": "Sliders"
+        },
+        {
+            "ruta": "list",
+            "icon": "list",
+            "texto": "Listas y Scroll"
         }
     ]
 }
